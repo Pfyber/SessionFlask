@@ -31,7 +31,24 @@ def register():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        user = users.get(User.username == username )
+        #print(user)
+        if user and user["password"] == password:
+            session["user"] = username
+            return redirect("/dashboard")
+
+
     return render_template("login.html")
+
+@app.route("/dashboard")
+def dashboard():
+    if "user" not in session:
+        return redirect("/login")
     
+    return render_template("dashboard.html", user = session["user"])
 
 app.run(debug=True)
