@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <title>Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+
 <body>
     <h2>Zapiski</h2>
     <h3>Pozdravljen {{ user }}!</h3>
 
-    <textarea name="" id="note" cols="50" rows="10"></textarea>
-    <button type="button">Shrani</button>
+    <textarea name="" id="note" cols="50" rows="10">{{ text }}</textarea>
+    <button onclick="saveNote()" type="button">Shrani</button>
+    <br>
+    <a href="/logout">LOGOUT</a>
 </body>
+
 </html>
+<script>
+    function saveNote() {
+        var noteText = document.getElementById("note").value
+        console.log(noteText)
+
+        $.ajax({
+            url: "/saveNote",
+            method: "post",
+            data: {
+                text: noteText
+            },
+            success: function (result) {
+                $("#weather-temp").html("<strong>" + result + "</strong> degrees");
+            }
+        });
+
+
+    }
+
+</script>
