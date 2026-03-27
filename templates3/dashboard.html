@@ -13,7 +13,7 @@
     <h2>Zapiski</h2>
     <h3>Pozdravljen {{ user }}!</h3>
 
-    <textarea name="" id="note" cols="50" rows="10">{{ text }}</textarea>
+    <textarea oninput="saveNote()" name="" id="note" cols="50" rows="10">{{ text }}</textarea>
     <button onclick="saveNote()" type="button">Shrani</button>
     <br>
     <a href="/logout">LOGOUT</a>
